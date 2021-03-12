@@ -181,7 +181,7 @@ public class Login extends JFrame implements ActionListener {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void fakeBbDd() throws MisExcepciones {
+	public static void fakeBbDd() throws MisExcepciones, ClienteNoExiste {
 		Cliente c1 = BuilderClienteDao.build(misDocumentos.DNI, "25359770W", "email1@gmail.com", "pass1", 1, "nom1",
 				"nom1", "nom1", 0, 0, null, null, null, null, null, 0, 0, 0, misClientes, false);
 		Cliente c2 = BuilderClienteDao.build(misDocumentos.NIE, "X6969696X", "email2@gmail.com", "pass2", 2, "nom2",

@@ -17,7 +17,7 @@ public class App {
 	static PedidoDao pedidoDao = new PedidoDao(misPedidos);
 
 	@SuppressWarnings({ "deprecation", "resource" })
-	public static void main(String[] args) throws MisExcepciones {
+	public static void main(String[] args) throws MisExcepciones, ClienteNoExiste {
 
 		System.out.println(
 				"Añadiendo los clientes...\n");

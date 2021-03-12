@@ -303,6 +303,9 @@ public class CreateUser extends JFrame {
 					lblNewLabel.setVisible(true);
 					e1.printStackTrace();
 
+				} catch (ClienteNoExiste e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

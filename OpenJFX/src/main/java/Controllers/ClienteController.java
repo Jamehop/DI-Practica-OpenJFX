@@ -30,7 +30,7 @@ public class ClienteController {
 	static ClienteDao clienteDao = new ClienteDao(misClientes);
 	Cliente c2;
 
-	public Cliente crearCliente() throws MisExcepciones {
+	public Cliente crearCliente() throws MisExcepciones, ClienteNoExiste {
 		c2 = new Cliente(misDocumentos.DNI, "25359770W", "email1@gmail.com", "pass1", 1, "nom1", "Carlos", "si",
 				601393403, 0, null, null, null, null, null, 0, 0, 0);
 		clienteDao.guardar(c2);
@@ -52,7 +52,7 @@ public class ClienteController {
 	}
 
 	@FXML
-	public void crearCli(ActionEvent actionEvent) throws MisExcepciones {
+	public void crearCli(ActionEvent actionEvent) throws MisExcepciones, ClienteNoExiste {
 		Cliente c = null;
 		c = crearCliente();
 

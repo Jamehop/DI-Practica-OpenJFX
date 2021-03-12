@@ -41,42 +41,36 @@ public class Bbdd {
 		return null;
 	}
 
-	public static void login(Connection c, String username, String password) {
+	public static void login(Connection c, String username, String password) throws ClienteNoExiste {
+		Statement stm = null;
+		ResultSet rs = null;
+		boolean encontrado = false;
 		try {
-
-			Statement stm = null;
-			ResultSet rs = null;
-			boolean encontrado = false;
+			stm = c.createStatement();
+		} catch (SQLException e) {
+			System.out.println("Error al crear el statement");
+			e.printStackTrace();
+		}
+		if (stm != null) {
 			try {
-				stm = c.createStatement();
+				rs = stm.executeQuery("SELECT * FROM jardineria.cliente");
+				while (rs.next()) {
+
+					if (rs.getString("nombre_cliente").equals(username)
+							&& rs.getString("username").equals(username)) {
+						encontrado = true;
+						break;
+					}
+				}
 			} catch (SQLException e) {
-				System.out.println("Error al crear el statement");
 				e.printStackTrace();
 			}
-			if (stm != null) {
-				try {
-					rs = stm.executeQuery("SELECT * FROM jardineria.cliente");
-					while (rs.next()) {
+		}
 
-						if (rs.getString("nombre_cliente").equals(username)
-								&& rs.getString("username").equals(username)) {
-							encontrado = true;
-							break;
-						}
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (!encontrado) {
-				username = null;
-				password = null;
-				throw new MisExcepciones(999);
-			}
-
-		} catch (MisExcepciones e1) {
-			e1.printStackTrace();
+		if (!encontrado) {
+			username = null;
+			password = null;
+			throw new ClienteNoExiste();
 		}
 	}
 

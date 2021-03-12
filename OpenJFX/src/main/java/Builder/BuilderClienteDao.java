@@ -29,12 +29,13 @@ public class BuilderClienteDao {
 	 * @param limiteCredito
 	 * @return Cliente
 	 * @throws MisExcepciones
+	 * @throws ClienteNoExiste 
 	 */
 	public static Cliente build(misDocumentos tipoDocumento, String documento, String email, String password,
 			int codigoCliente, String Username, String nombreContacto, String apellidoContacto, int telefono, int fax,
 			String lineaDireccion, String lineaDireccion2, String ciudad, String region, String pais, int codigoPostal,
 			int codigoEmpleado, int limiteCredito, List<Cliente> misClientes, boolean actualizar)
-			throws MisExcepciones {
+			throws MisExcepciones, ClienteNoExiste {
 
 		ClienteDao clienteDao = new ClienteDao(misClientes);
 		validarDocumento(tipoDocumento, documento);
@@ -55,16 +56,17 @@ public class BuilderClienteDao {
 	 * @param clienteDao
 	 * @param codigoCliente
 	 * @throws MisExcepciones
+	 * @throws ClienteNoExiste 
 	 */
-	public static void validarId(ClienteDao clienteDao, int codigoCliente) throws MisExcepciones {
+	public static void validarId(ClienteDao clienteDao, int codigoCliente) throws ClienteNoExiste {
 
 		if (codigoCliente < 0) {
-			throw new MisExcepciones(111);
+			throw new ClienteNoExiste();
 		}
 		// Comprueba que no existan dos clientes con el mismo id
 		for (Cliente cliente : clienteDao.getAll()) {
 			if (cliente.getId() == codigoCliente) {
-				throw new MisExcepciones(111);
+				throw new ClienteNoExiste();
 			}
 		}
 	}
